@@ -1,165 +1,227 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GEM - Governance & Execution Model</title>
+    <title>Governance & Execution Model</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
             margin: 0;
-            padding: 0;
-        }
-
-        h1 {
-            text-align: center;
-            color: #004d99; /* Blue color from the image */
-            margin-top: 20px;
-            font-size: 2.5em;
-            font-weight: 700;
-        }
-
-        .centered-link {
-            display: block;
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        /* Styled link for the "View Updated Documents" button */
-        .centered-link a {
-            text-decoration: none;
-            color: white;
-            background-color: #007bff; /* Blue color from the image */
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-
-        .centered-link a:hover {
-            background-color: #0056b3;
-        }
-
-        /* Set uniform width for all sections */
-        .content-editable, .content-section {
-            width: 90%; /* Uniform width for all */
-            margin: 20px auto; /* Center the content */
-            padding: 0 20px;
-        }
-
-        /* Subtle background color transition on hover */
-        .content-editable, .content-section div {
-            display: block;
-            padding: 20px;
-            height: auto;
-            border: 1px solid #ccc;
-            background-color: #fff;
-            font-size: 1.1em;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-        }
-
-        /* Pop-out effect on hover */
-        .content-editable:hover, .content-section div:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            background-color: #f0f8ff; /* Subtle light blue background */
-        }
-
-        /* Click effect */
-        .content-editable:active, .content-section div:active {
-            transform: scale(0.95);
-        }
-
-        /* Flexbox for middle section to make it even */
-        .content-section {
-            display: flex;
-            justify-content: space-between;
-            padding: 0;
-        }
-
-        /* Individual boxes inside the middle section */
-        .content-section div {
-            flex: 1;
-            margin: 0 10px;
-        }
-
-        .content-editable h2, .content-section h2 {
-            color: #004d99; /* Blue color from the image */
-            font-size: 1.5em;
-            margin-bottom: 10px;
-        }
-
-        /* Improve text filling inside the boxes */
-        .content-editable p, .content-section p {
-            font-size: 1.2em;
+            font-family: 'Roboto Condensed', Arial, sans-serif;
             line-height: 1.6;
+            color: #000;
+            background: url('img/Gem Stock.jpg') no-repeat center center fixed;
+            background-size: cover;
+            animation: backgroundAnimation 15s ease infinite;
         }
 
-        .related {
+        @keyframes backgroundAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        header {
+            background: linear-gradient(to right, #FF0000, #000);
+            color: #fff;
+            padding: 1rem 0;
             text-align: center;
-            font-size: 1.2em;
-            margin: 40px 0;
+            position: relative;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        header p {
+            margin: 0.5rem 0 0;
+            font-size: 1.1rem;
+        }
+
+        .header-image {
+            position: absolute;
+            top: 50%;
+            right: 1rem;
+            transform: translateY(-50%);
+            max-height: 50px;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+
+        section {
+            background: rgba(249, 249, 249, 0.9); /* Semi-transparent white background */
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        section h2 {
+            margin-top: 0;
+            font-size: 1.8rem;
+            color: #FF0000;
+        }
+
+        .document-types {
+            padding: 1.5rem;
+        }
+
+        .document-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .document-row {
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+        }
+
+        .document-box {
+            flex: 1;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1rem;
+            text-align: left;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .document-box h3 {
+            margin: 0 0 0.5rem;
+            font-size: 1.2rem;
             color: #333;
         }
 
-        /* General reset for all links to remove the boxy appearance */
+        .document-box:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .document-box::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            width: 0;
+            background: #FF0000;
+            transition: width 0.3s ease;
+        }
+
+        .document-box:hover::after {
+            width: 100%;
+        }
+
         a {
-            text-decoration: none; /* Remove underline */
-            color: inherit; /* Make the link inherit the text color */
-            background-color: transparent; /* Remove any background */
-            border: none; /* Remove any borders */
-            padding: 0; /* Remove padding */
-            margin: 0; /* Remove margin */
-            outline: none; /* Remove outline */
+            color: #000;
+            text-decoration: none;
+            position: relative;
             transition: color 0.3s ease;
         }
 
-        /* Hover color for links */
-        a:hover {
-            color: #ffcc00; /* Yellow color from the image */
+        a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #FF5555;
+            transition: width 0.3s ease;
         }
 
+        a:hover {
+            color: #FF5555;
+        }
+
+        a:hover::after {
+            width: 100%;
+        }
+
+        footer {
+            background: #000;
+            color: #fff;
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
+
 <body>
+    <header>
+        <h1>Governance & Execution Model</h1>
+        <p>Your guide to organizational policies, procedures, and forms</p>
+        <img src="img/Logo.png" alt="Company Logo" class="header-image">
+    </header>
 
-    <h1>Governance & Execution Model</h1>
+    <main>
+        <section>
+            <h2>Welcome to the Governance & Execution Model Page</h2>
+            <p>
+                This page is designed to provide an organized structure for accessing and managing workplace documents.
+                Below, you can find categorized document types and their codes. Click on any section to learn more or add
+                additional policies as needed.
+            </p>
+        </section>
 
-    <!-- Centered link for "View Updated Documents" -->
-    <div class="centered-link">
-        <a href="https://m1services.sharepoint.us/sites/GovernanceandExecution/_layouts/15/doc.aspx?sourcedoc={31a72003-5c37-421f-ab2a-65cda26bb7f9}&action=edit" target="_blank" rel="noopener noreferrer">View Updated Documents</a>
-    </div>
-
-    <!-- Section 1 - Editable content -->
-    <div class="content-editable">
-        <h2>1.0 THE WAY</h2>
-        <a href="https://m1services.sharepoint.us/sites/GovernanceandExecution/Shared%20Documents/Forms/AllItems.aspx" target="_blank" rel="noopener noreferrer">1.1 Governance and Execution</a><br>
+        <!-- Document Types -->
+        <section class="document-types">
+            <h2>Document Types</h2>
+            <div class="document-grid">
+                <!-- 1.0 Row -->
+                <div class="document-box">
+                    <h3>1.0 THE WAY</h3>
+                    <ul>
+                        <a href="https://m1services.sharepoint.us/sites/GovernanceandExecution/Shared%20Documents/Forms/AllItems.aspx" target="_blank" rel="noopener noreferrer">1.1 Governance and Execution</a><br>
         <a href="https://m1services.sharepoint.us/sites/CodeofEthicsBusinessConduct/Shared%20Documents/Forms/AllItems.aspx" target="_blank" rel="noopener noreferrer">1.2 Code of Ethics & Business Conduct</a><br>
         <a href="https://m1services.sharepoint.us/sites/PolicyandProcedure/Shared%20Documents/Forms/AllItems.aspx" target="_blank" rel="noopener noreferrer">1.3 Policy and Procedure</a><br>
         <a href="https://m1services.sharepoint.us/sites/ManagementandAuditability/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">1.4 Management and Auditability</a><br>
         <a href="https://m1services.sharepoint.us/sites/QualityPolicy/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FQualityPolicy%2FShared%20Documents&newTargetListUrl=%2Fsites%2FQualityPolicy%2FShared%20Documents&viewpath=%2Fsites%2FQualityPolicy%2FShared%20Documents%2FForms%2FAllItems%2Easpx&viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">1.5 Quality Policy</a><br>
         <a href="https://m1services.sharepoint.us/sites/SafetyPolicy/Shared%20Documents/Forms/AllItems.aspx" target="_blank" rel="noopener noreferrer">1.6 Safety Policy</a>
-    </div>
+                    </ul>
+                </div>
 
-    <!-- Sections 2, 3, 4 -->
-    <div class="content-section">
-        <div>
-            <h2>2.0 Integrated Planning and Corporate Development</h2>
-            <p>
-                <a href="https://m1services.sharepoint.us/sites/IntegratedPlanning/Shared%20Documents/Forms/AllItems.aspx" target="_blank" rel="noopener noreferrer">2.1 Integrated Planning</a><br>
+                <!-- 2.0, 3.0, 4.0 Row -->
+                <div class="document-row">
+                    <div class="document-box">
+                        <h3>2.0 Integrated Planning and Corporate Development</h3>
+                        <ul>
+                       <a href="https://m1services.sharepoint.us/sites/IntegratedPlanning/Shared%20Documents/Forms/AllItems.aspx" target="_blank" rel="noopener noreferrer">2.1 Integrated Planning</a><br>
                 <a href="https://m1services.sharepoint.us/sites/BusinessDevelopment/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">2.2 Business Development</a><br>
                 <a href="https://m1services.sharepoint.us/sites/MergersandAcquisitions/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">2.3 Mergers and Acquisitions</a><br>
                 <a href="https://m1services.sharepoint.us/sites/Communications/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">2.4 Communications</a><br>
                 <a href="https://m1services.sharepoint.us/sites/StrategicPlanning/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">2.5 Strategic Planning</a>
-            </p>
-        </div>
-
-        <div>
-            <h2>3.0 Program Performance</h2>
-            <p>
-                <a href="https://m1services.sharepoint.us/sites/PerformanceManagement/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">3.1 Performance Management</a><br>
+                        </ul>
+                    </div>
+                    <div class="document-box">
+                        <h3>3.0 Program Performance</h3>
+                        <ul>
+                            <a href="https://m1services.sharepoint.us/sites/PerformanceManagement/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">3.1 Performance Management</a><br>
                 <a href="https://m1services.sharepoint.us/sites/MetricsKPI/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">3.2 Metrics & KPI</a><br>
                 <a href="https://m1services.sharepoint.us/sites/Reporting/Shared%20Documents/Forms/AllItems.aspx" target="_blank" rel="noopener noreferrer">3.3 Reporting</a><br>
                 <a href="https://m1services.sharepoint.us/sites/ResourceAllocation/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">3.4 Resource Allocation</a><br>
@@ -167,27 +229,28 @@
                 <a href="https://m1services.sharepoint.us/sites/RiskManagement/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">3.6 Risk Management</a><br>
                 <a href="https://m1services.sharepoint.us/sites/GemQuality/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">3.7 Quality</a><br>
                 <a href="https://m1services.sharepoint.us/sites/ContinuousImprovements/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">3.8 Continuous Improvements</a>
-            </p>
-        </div>
-
-        <div>
-            <h2>4.0 People</h2>
-            <p>
-                <a href="https://m1services.sharepoint.us/sites/Engagement/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">4.1 Engagement</a><br>
+                        </ul>
+                    </div>
+                    <div class="document-box">
+                        <h3>4.0 People</h3>
+                        <ul>
+                           <a href="https://m1services.sharepoint.us/sites/Engagement/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">4.1 Engagement</a><br>
                 <a href="https://m1services.sharepoint.us/sites/CompensationBenefits/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">4.2 Compensation & Benefits</a><br>
                 <a href="https://m1services.sharepoint.us/sites/TrainingDevelopment/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">4.3 Training & Development</a><br>
                 <a href="https://m1services.sharepoint.us/sites/EqualOpportunityEngagement/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">4.4 Equal Opportunity Engagement</a><br>
+				 <a href="https://m1services.sharepoint.us/sites/EqualOpportunityEngagement/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">4.5 Employee Measurement</a><br>
                 <a href="https://m1services.sharepoint.us/sites/EmployeeSatisfaction/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">4.6 Employee Satisfaction</a><br>
                 <a href="https://m1services.sharepoint.us/sites/Finance/Shared%20Documents/Forms/AllItems.aspx?viewid=50405046%2Df3a5%2D4e6a%2D8674%2Db221c4cafbf9" target="_blank" rel="noopener noreferrer">4.7 Finance</a><br>
                 <a href="https://m1services.sharepoint.us/sites/I.T/Shared%20Documents/Forms/AllItems.aspx" target="_blank" rel="noopener noreferrer">4.8 I.T.</a>
-            </p>
-        </div>
-    </div>
+                        </ul>
+                    </div>
+                </div>
 
-    <!-- Section 5 - Editable content -->
-    <div class="content-editable">
-        <h2>5.0 Compliance & Conduct</h2>
-        <a href="https://m1services.sharepoint.us/sites/CompliancePolicy/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">5.1 Compliance Policy</a><br>
+                <!-- 5.0 Row -->
+                <div class="document-box">
+                    <h3>5.0 Compliance & Conduct</h3>
+                    <ul>
+                         <a href="https://m1services.sharepoint.us/sites/CompliancePolicy/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">5.1 Compliance Policy</a><br>
         <a href="https://m1services.sharepoint.us/sites/ForeignCorruptPractices/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">5.2 Foreign Corrupt Practices</a><br>
         <a href="https://m1services.sharepoint.us/sites/InternationalTradeCompliance/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">5.3 International Trade Compliance</a><br>
         <a href="https://m1services.sharepoint.us/sites/GovernmentEmploymentRegulations/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">5.4 Government Employment Regulations</a><br>
@@ -197,16 +260,16 @@
         <a href="https://m1services.sharepoint.us/sites/TimeCharging/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">5.8 Time Charging</a><br>
         <a href="https://m1services.sharepoint.us/sites/SafetyGEM/Shared%20Documents/Forms/AllItems.aspx?viewid=50405046%2Df3a5%2D4e6a%2D8674%2Db221c4cafbf9" target="_blank" rel="noopener noreferrer">5.9 Safety</a><br>
         <a href="https://m1services.sharepoint.us/sites/LegalGEM/Shared%20Documents/Forms/AllItems.aspx?viewid=50405046%2Df3a5%2D4e6a%2D8674%2Db221c4cafbf9" target="_blank" rel="noopener noreferrer">5.10 Legal</a>
-    </div>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
 
-    <!-- Related sub-policy section -->
-    <div class="related">
-        <strong>Related Sub-Policy(ies)</strong>
-    </div>
-
-    <div class="related">
-        <strong>Name | COE/Unit Issuing | CoreProcess | Original Date of Issue | Revised/Reviewed | Document Manager</strong>
-    </div>
-
+    <footer>
+        <p>&copy; 2024 Governance & Execution Model Portal. All Rights Reserved.</p>
+    </footer>
 </body>
+
 </html>
+3!
