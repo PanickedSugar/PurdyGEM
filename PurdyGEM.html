@@ -64,44 +64,81 @@
         }
 
         section {
-            background: rgba(249, 249, 249, 0.9); /* Semi-transparent white background */
+            background: rgba(249, 249, 249, 0.9);
             border-radius: 8px;
             padding: 1.5rem;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         section h2 {
             margin-top: 0;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: #FF0000;
         }
 
-        .document-types {
+        .document-types-wrapper {
+            display: flex;
+            gap: 1rem;
+            align-items: stretch;
+        }
+
+        .side-box {
+            flex: 0.13;
+            background: rgba(249, 249, 249, 0.9);
+            border-radius: 8px;
             padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .side-box h3 {
+            font-size: 1.6rem;
+            color: #FF0000;
+            margin: 0 0 1rem;
+        }
+
+        .side-box a {
+            color: #000;
+            text-decoration: none;
+            font-size: 1rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .side-box a:hover {
+            color: #FF5555;
+        }
+
+        .document-types {
+            flex: 1;
+            background: rgba(249, 249, 249, 0.9);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
         }
 
         .document-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
         }
 
-        .document-row {
-            display: flex;
-            gap: 1rem;
-            justify-content: space-between;
+        .full-width-box {
+            grid-column: span 3;
         }
 
         .document-box {
-            flex: 1;
             background: #fff;
             border: 1px solid #ddd;
             border-radius: 5px;
             padding: 1rem;
             text-align: left;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            position: relative;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
@@ -116,21 +153,6 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .document-box::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            height: 3px;
-            width: 0;
-            background: #FF0000;
-            transition: width 0.3s ease;
-        }
-
-        .document-box:hover::after {
-            width: 100%;
-        }
-
         a {
             color: #000;
             text-decoration: none;
@@ -138,23 +160,8 @@
             transition: color 0.3s ease;
         }
 
-        a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 0;
-            background-color: #FF5555;
-            transition: width 0.3s ease;
-        }
-
         a:hover {
             color: #FF5555;
-        }
-
-        a:hover::after {
-            width: 100%;
         }
 
         footer {
@@ -162,12 +169,6 @@
             color: #fff;
             text-align: center;
             padding: 1rem 0;
-            margin-top: 2rem;
-        }
-
-        footer p {
-            margin: 0;
-            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -189,87 +190,89 @@
             </p>
         </section>
 
-        <!-- Document Types -->
-        <section class="document-types">
-            <h2>Document Types</h2>
-            <div class="document-grid">
-                <!-- 1.0 Row -->
-                <div class="document-box">
-                    <h3>1.0 THE WAY</h3>
-                    <ul>
-                        <a href="https://m1services.sharepoint.us/sites/GovernanceandExecution/Shared%20Documents/Forms/AllItems.aspx" target="_blank" rel="noopener noreferrer">1.1 Governance and Execution</a><br>
-        <a href="https://m1services.sharepoint.us/sites/CodeofEthicsBusinessConduct/Shared%20Documents/Forms/AllItems.aspx" target="_blank" rel="noopener noreferrer">1.2 Code of Ethics & Business Conduct</a><br>
-        <a href="https://m1services.sharepoint.us/sites/PolicyandProcedure/Shared%20Documents/Forms/AllItems.aspx" target="_blank" rel="noopener noreferrer">1.3 Policy and Procedure</a><br>
-        <a href="https://m1services.sharepoint.us/sites/ManagementandAuditability/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">1.4 Management and Auditability</a><br>
-        <a href="https://m1services.sharepoint.us/sites/QualityPolicy/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FQualityPolicy%2FShared%20Documents&newTargetListUrl=%2Fsites%2FQualityPolicy%2FShared%20Documents&viewpath=%2Fsites%2FQualityPolicy%2FShared%20Documents%2FForms%2FAllItems%2Easpx&viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">1.5 Quality Policy</a><br>
-        <a href="https://m1services.sharepoint.us/sites/SafetyPolicy/Shared%20Documents/Forms/AllItems.aspx" target="_blank" rel="noopener noreferrer">1.6 Safety Policy</a>
-                    </ul>
-                </div>
+        <div class="document-types-wrapper">
+            <!-- Left Side Box -->
+            <div class="side-box">
+                <h3>Quick Links</h3>
+                <a href="https://jamis.com">Time Sheet</a><br>
+                <a href="https://humanic.com">Humanic</a><br>
+                <a href="https://m1supportservices.freshservice.com/">Helpdesk Tickets</a><br>
+                <a href="https://www.m1services.com">M1 Website</a><br>
+            </div>
 
-                <!-- 2.0, 3.0, 4.0 Row -->
-                <div class="document-row">
+			<!-- Document Types Box -->
+            <section class="document-types">
+                <h2>Document Types</h2>
+                <div class="document-grid">
+                    <div class="document-box full-width-box">
+                        <h3>1.0 THE WAY</h3>
+                        <a href="https://m1services.sharepoint.us/sites/GovernanceandExecution/Shared%20Documents/Forms/AllItems.aspx">1.1 Governance and Execution</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/CodeofEthicsBusinessConduct/Shared%20Documents/Forms/AllItems.aspx">1.2 Code of Ethics & Business Conduct</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/PolicyandProcedure/Shared%20Documents/Forms/AllItems.aspx">1.3 Policy and Procedure</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/ManagementandAuditability/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">1.4 Management and Auditability</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/QualityPolicy/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FQualityPolicy%2FShared%20Documents&newTargetListUrl=%2Fsites%2FQualityPolicy%2FShared%20Documents&viewpath=%2Fsites%2FQualityPolicy%2FShared%20Documents%2FForms%2FAllItems%2Easpx&viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">1.5 Quality Policy</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/SafetyPolicy/Shared%20Documents/Forms/AllItems.aspx">1.6 Safety Policy</a>
+                    </div>
                     <div class="document-box">
                         <h3>2.0 Integrated Planning and Corporate Development</h3>
-                        <ul>
-                       <a href="https://m1services.sharepoint.us/sites/IntegratedPlanning/Shared%20Documents/Forms/AllItems.aspx" target="_blank" rel="noopener noreferrer">2.1 Integrated Planning</a><br>
-                <a href="https://m1services.sharepoint.us/sites/BusinessDevelopment/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">2.2 Business Development</a><br>
-                <a href="https://m1services.sharepoint.us/sites/MergersandAcquisitions/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">2.3 Mergers and Acquisitions</a><br>
-                <a href="https://m1services.sharepoint.us/sites/Communications/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">2.4 Communications</a><br>
-                <a href="https://m1services.sharepoint.us/sites/StrategicPlanning/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">2.5 Strategic Planning</a>
-                        </ul>
+                        <a href="https://m1services.sharepoint.us/sites/IntegratedPlanning/Shared%20Documents/Forms/AllItems.aspx">2.1 Integrated Planning</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/BusinessDevelopment/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">2.2 Business Development</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/MergersandAcquisitions/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">2.3 Mergers and Acquisitions</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/Communications/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">2.4 Communications</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/StrategicPlanning/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">2.5 Strategic Planning</a>
                     </div>
                     <div class="document-box">
                         <h3>3.0 Program Performance</h3>
-                        <ul>
-                            <a href="https://m1services.sharepoint.us/sites/PerformanceManagement/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">3.1 Performance Management</a><br>
-                <a href="https://m1services.sharepoint.us/sites/MetricsKPI/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">3.2 Metrics & KPI</a><br>
-                <a href="https://m1services.sharepoint.us/sites/Reporting/Shared%20Documents/Forms/AllItems.aspx" target="_blank" rel="noopener noreferrer">3.3 Reporting</a><br>
-                <a href="https://m1services.sharepoint.us/sites/ResourceAllocation/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">3.4 Resource Allocation</a><br>
-                <a href="https://m1services.sharepoint.us/sites/SupplyChainManagement/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">3.5 Supply Chain Management</a><br>
-                <a href="https://m1services.sharepoint.us/sites/RiskManagement/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">3.6 Risk Management</a><br>
-                <a href="https://m1services.sharepoint.us/sites/GemQuality/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">3.7 Quality</a><br>
-                <a href="https://m1services.sharepoint.us/sites/ContinuousImprovements/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">3.8 Continuous Improvements</a>
-                        </ul>
+                        <a href="https://m1services.sharepoint.us/sites/PerformanceManagement/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">3.1 Performance Management</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/MetricsKPI/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">3.2 Metrics & KPI</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/Reporting/Shared%20Documents/Forms/AllItems.aspx">3.3 Reporting</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/ResourceAllocation/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">3.4 Resource Allocation</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/SupplyChainManagement/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">3.5 Supply Chain Management</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/RiskManagement/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">3.6 Risk Management</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/GemQuality/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">3.7 Quality</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/ContinuousImprovements/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">3.8 Continuous Improvements</a>
                     </div>
                     <div class="document-box">
                         <h3>4.0 People</h3>
-                        <ul>
-                           <a href="https://m1services.sharepoint.us/sites/Engagement/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">4.1 Engagement</a><br>
-                <a href="https://m1services.sharepoint.us/sites/CompensationBenefits/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">4.2 Compensation & Benefits</a><br>
-                <a href="https://m1services.sharepoint.us/sites/TrainingDevelopment/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">4.3 Training & Development</a><br>
-                <a href="https://m1services.sharepoint.us/sites/EqualOpportunityEngagement/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">4.4 Equal Opportunity Engagement</a><br>
-				 <a href="https://m1services.sharepoint.us/sites/EqualOpportunityEngagement/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">4.5 Employee Measurement</a><br>
-                <a href="https://m1services.sharepoint.us/sites/EmployeeSatisfaction/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">4.6 Employee Satisfaction</a><br>
-                <a href="https://m1services.sharepoint.us/sites/Finance/Shared%20Documents/Forms/AllItems.aspx?viewid=50405046%2Df3a5%2D4e6a%2D8674%2Db221c4cafbf9" target="_blank" rel="noopener noreferrer">4.7 Finance</a><br>
-                <a href="https://m1services.sharepoint.us/sites/I.T/Shared%20Documents/Forms/AllItems.aspx" target="_blank" rel="noopener noreferrer">4.8 I.T.</a>
-                        </ul>
+                        <a href="https://m1services.sharepoint.us/sites/Engagement/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">4.1 Engagement</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/CompensationBenefits/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">4.2 Compensation & Benefits</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/TrainingDevelopment/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">4.3 Training & Development</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/EqualOpportunityEngagement/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">4.4 Equal Opportunity Engagement</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/EqualOpportunityEngagement/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">4.5 Employee Measurement</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/EmployeeSatisfaction/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">4.6 Employee Satisfaction</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/Finance/Shared%20Documents/Forms/AllItems.aspx?viewid=50405046%2Df3a5%2D4e6a%2D8674%2Db221c4cafbf9">4.7 Finance</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/I.T/Shared%20Documents/Forms/AllItems.aspx" target="_blank" rel="noopener noreferrer">4.8 I.T.</a>
+                    </div>
+                    <div class="document-box full-width-box">
+                       <h3>5.0 Compliance & Conduct</h3>
+                        <a href="https://m1services.sharepoint.us/sites/CompliancePolicy/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">5.1 Compliance Policy</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/ForeignCorruptPractices/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">5.2 Foreign Corrupt Practices</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/InternationalTradeCompliance/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">5.3 International Trade Compliance</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/GovernmentEmploymentRegulations/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">5.4 Government Employment Regulations</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/ProcurementIntegrity/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">5.5 Procurement Integrity</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/BusinessConductStandards/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">5.6 Business Conduct Standards</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/TravelPolicies/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">5.7 Travel Policies</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/TimeCharging/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b">5.8 Time Charging</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/SafetyGEM/Shared%20Documents/Forms/AllItems.aspx?viewid=50405046%2Df3a5%2D4e6a%2D8674%2Db221c4cafbf9">5.9 Safety</a><br>
+                        <a href="https://m1services.sharepoint.us/sites/LegalGEM/Shared%20Documents/Forms/AllItems.aspx?viewid=50405046%2Df3a5%2D4e6a%2D8674%2Db221c4cafbf9">5.10 Legal</a>
                     </div>
                 </div>
+            </section>
 
-                <!-- 5.0 Row -->
-                <div class="document-box">
-                    <h3>5.0 Compliance & Conduct</h3>
-                    <ul>
-                         <a href="https://m1services.sharepoint.us/sites/CompliancePolicy/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">5.1 Compliance Policy</a><br>
-        <a href="https://m1services.sharepoint.us/sites/ForeignCorruptPractices/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">5.2 Foreign Corrupt Practices</a><br>
-        <a href="https://m1services.sharepoint.us/sites/InternationalTradeCompliance/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">5.3 International Trade Compliance</a><br>
-        <a href="https://m1services.sharepoint.us/sites/GovernmentEmploymentRegulations/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">5.4 Government Employment Regulations</a><br>
-        <a href="https://m1services.sharepoint.us/sites/ProcurementIntegrity/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">5.5 Procurement Integrity</a><br>
-        <a href="https://m1services.sharepoint.us/sites/BusinessConductStandards/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">5.6 Business Conduct Standards</a><br>
-        <a href="https://m1services.sharepoint.us/sites/TravelPolicies/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">5.7 Travel Policies</a><br>
-        <a href="https://m1services.sharepoint.us/sites/TimeCharging/Shared%20Documents/Forms/AllItems.aspx?viewid=b397c4ff%2Dc1d8%2D4ce0%2Db5c3%2D604fd490df3b" target="_blank" rel="noopener noreferrer">5.8 Time Charging</a><br>
-        <a href="https://m1services.sharepoint.us/sites/SafetyGEM/Shared%20Documents/Forms/AllItems.aspx?viewid=50405046%2Df3a5%2D4e6a%2D8674%2Db221c4cafbf9" target="_blank" rel="noopener noreferrer">5.9 Safety</a><br>
-        <a href="https://m1services.sharepoint.us/sites/LegalGEM/Shared%20Documents/Forms/AllItems.aspx?viewid=50405046%2Df3a5%2D4e6a%2D8674%2Db221c4cafbf9" target="_blank" rel="noopener noreferrer">5.10 Legal</a>
-                    </ul>
-                </div>
+            <!-- Right Side Box -->
+            <div class="side-box">
+                <h3>Right Box</h3>
+                <p>Additional content or links can go here.</p>
             </div>
-        </section>
+        </div>
     </main>
 
     <footer>
-        <p>&copy; 2024 Governance & Execution Model Portal. All Rights Reserved.</p>
+        <p>&copy;  2025 M1 Support Services, LP All Rights Reserved
+ </p>
     </footer>
 </body>
 
 </html>
-3!
+hostingstart.html
+Displaying hostingstart.html.
